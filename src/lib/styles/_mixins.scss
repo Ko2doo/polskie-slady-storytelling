@@ -14,6 +14,10 @@
   padding: var(--size-s);
 }
 
+// *
+
+// :------> Popup
+
 @mixin popup() {
   @include popup-padding;
 
@@ -41,6 +45,12 @@
   border-radius: var(--b-radius-m);
   background-color: var(--menu-bg-color);
 }
+
+// <------: Popup
+
+// *
+
+// :------> Menu
 
 @mixin menu() {
   @include popup-padding;
@@ -88,3 +98,56 @@
   background-color: var(--general-bg);
   color: var(--text-color);
 }
+
+// <------: Menu
+
+// *
+
+// :------> Title, subtitle and other
+
+@mixin heading($align) {
+  font-family: var(--f-family-heading);
+  font-size: var(--f-size-xxl);
+
+  text-align: $align;
+  text-transform: uppercase;
+
+  display: block;
+}
+
+// <------: Title, subtitle and other
+
+// *
+
+// :------> Grid
+
+@mixin flex-column() {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-row() {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+@mixin col() {
+  flex-shrink: 0;
+
+  word-wrap: break-word;
+  box-sizing: border-box;
+
+  &:not(:first-child) {
+    margin-left: var(--grid-system-offset-oneside);
+  }
+}
+
+@mixin size($size) {
+  $value: calc((100% / var(--grid-system-columns)) * $size);
+  width: $value;
+}
+
+// <------: Grid
+
+// *

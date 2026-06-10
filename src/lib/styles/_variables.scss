@@ -32,6 +32,11 @@
   // Container width
   --container-width: min(88vw, #{rem(1920)});
 
+  // Grid System params
+  --grid-system-columns: 12;
+  --grid-system-offset: #{rem(32)};
+  --grid-system-offset-oneside: calc(var(--grid-system-offset) / 2);
+
   // Scene height
   --scene-min-height: 100svh;
 
