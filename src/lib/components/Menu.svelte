@@ -19,7 +19,7 @@
   const ui = useUI();
 </script>
 
-<section class="menu">
+<section class="menu" style:--menu-bg-color={ui.isOpen(id) ? "var(--secondary-bg)" : "transparent"}>
   <MenuButton {label} {icon} onclick={() => children && ui.toggle(id, group)} />
 
   {#if children}

@@ -1,15 +1,17 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
+  import type { Action } from "svelte/action";
   import type { SvelteHTMLElements } from "svelte/elements";
 
   type Props = SvelteHTMLElements["article"] & {
     children: Snippet;
+    floatAction?: Action<HTMLElement>;
   };
 
-  let { title, children, ...restProps }: Props = $props();
+  let { children, floatAction = () => {}, ...restProps }: Props = $props();
 </script>
 
-<article data-article-card="" {...restProps}>
+<article use:floatAction data-article-card="" {...restProps}>
   {@render children?.()}
 </article>
 

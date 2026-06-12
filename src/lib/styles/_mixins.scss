@@ -50,6 +50,10 @@
 
   border-radius: var(--b-radius-m);
   background-color: var(--menu-bg-color);
+
+  &:hover {
+    background-color: var(--secondary-bg);
+  }
 }
 
 // <------: Popup
@@ -90,7 +94,7 @@
   gap: var(--size-s);
 
   border-radius: var(--b-radius-s);
-  background-color: var(--menu-item-bg);
+  // background-color: var(--menu-item-bg);
   color: var(--menu-item-color);
 }
 
@@ -110,8 +114,11 @@
   padding: var(--size-xs) var(--size-s);
 
   border-radius: var(--b-radius-s);
-  background-color: var(--submenu-bg);
   color: var(--submenu-color);
+
+  &:hover {
+    background-color: var(--submenu-bg);
+  }
 }
 
 // <------: Menu
@@ -178,6 +185,12 @@
 
 @mixin size($size) {
   $value: calc((100% / var(--grid-system-columns)) * $size);
+  width: $value;
+  flex-basis: $value;
+}
+
+@mixin col-size($size) {
+  $value: calc((100% / var(--grid-system-columns) * $size) - var(--grid-system-offset-oneside));
   width: $value;
   flex-basis: $value;
 }

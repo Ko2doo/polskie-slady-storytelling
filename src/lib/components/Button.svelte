@@ -66,7 +66,11 @@
     gap: var(--size-s);
 
     border-radius: var(--b-radius-s);
-    background-color: var(--secondary-bg);
+    // background-color: var(--secondary-bg);
     color: var(--text-color);
+
+    &:hover {
+      background-color: var(--secondary-bg);
+    }
   }
 </style>

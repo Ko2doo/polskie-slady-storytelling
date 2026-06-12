@@ -21,6 +21,7 @@
   import Lockscreen from "./stories/Lockscreen.svelte";
   import Hero from "./stories/slides/Hero.svelte";
   import History from "./stories/slides/History.svelte";
+  import PSTApp from "./stories/slides/PSTApp.svelte";
 
   const ui = createUIContext();
   const POPUP_ID = "settings";
@@ -60,22 +61,23 @@
 <BodyOverlay />
 
 <main class="container">
-  <div class="viewport">
-    <Button
-      bind:ref={triggerEl}
-      onclick={() => ui.toggle(POPUP_ID, POPUP_GROUP)}
-      data-btn-settings={ui.isOpen(POPUP_ID) ? "opened" : ""}
-    >
-      {#snippet icon()}
-        <span class="icon-wrapper" class:icon-wrapper--active={ui.isOpen(POPUP_ID)}>
-          {@html ui.isOpen(POPUP_ID) ? SettingsDownIcon : SettingsIcon}
-        </span>
-      {/snippet}
-    </Button>
+  <Button
+    bind:ref={triggerEl}
+    onclick={() => ui.toggle(POPUP_ID, POPUP_GROUP)}
+    data-btn-settings={ui.isOpen(POPUP_ID) ? "opened" : ""}
+  >
+    {#snippet icon()}
+      <span class="icon-wrapper" class:icon-wrapper--active={ui.isOpen(POPUP_ID)}>
+        {@html ui.isOpen(POPUP_ID) ? SettingsDownIcon : SettingsIcon}
+      </span>
+    {/snippet}
+  </Button>
 
+  <div class="viewport">
     <!-- <Lockscreen /> -->
     <!-- <Hero /> -->
-    <History />
+    <!-- <History /> -->
+    <PSTApp />
   </div>
 </main>
 
@@ -130,19 +132,24 @@
 
   :global(.button[data-btn-settings]) {
     position: absolute;
-    left: var(--size-m);
-    bottom: var(--size-m);
+    left: 8%;
+    bottom: 4%;
 
-    width: rem(48);
-    height: rem(48);
+    width: clamp(rem(30), 4vw, rem(48));
+    height: clamp(rem(30), 4vw, rem(48));
 
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    transition: all 0.4 ease-in-out;
+    border: rem(1) solid var(--secondary-bg);
 
     @include z-index-xl;
+
+    @media (min-width: rem(830)) {
+      left: 1.3%;
+      bottom: var(--size-l);
+    }
   }
 
   :global(.button[data-btn-settings="opened"]) {
