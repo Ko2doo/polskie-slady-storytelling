@@ -222,6 +222,7 @@
   @include size(12);
 
   & {
+    overflow: hidden;
     position: relative;
     height: 100%;
 

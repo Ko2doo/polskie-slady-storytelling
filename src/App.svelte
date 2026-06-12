@@ -50,13 +50,32 @@
 
   const zenModeToggler = (): void => {
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-      zenModeState = true;
+      document.documentElement.requestFullscreen().catch(() => {});
     } else {
-      document.exitFullscreen();
-      zenModeState = false;
+      document.exitFullscreen().catch(() => {});
     }
   };
+
+  $effect(() => {
+    const handleFullscreenChange = () => {
+      zenModeState = !!document.fullscreenElement;
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "F11") {
+        event.preventDefault();
+        zenModeToggler();
+      }
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    window.addEventListener("keydown", handleKeyDown, { capture: true });
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      window.removeEventListener("keydown", handleKeyDown, { capture: true });
+    };
+  });
 </script>
 
 <BodyOverlay />
@@ -88,7 +107,7 @@
 <Popup id={POPUP_ID} anchor={triggerEl} placement="bottom" offset={16}>
   <Button
     buttonName="menu-button"
-    label={$i18n.t(zenModeState ? "ui.popup.zenModeOff" : "ui.popup.zenModeOnn")}
+    label={zenModeState ? $i18n.t("ui.popup.zenModeOff") : $i18n.t("ui.popup.zenModeOnn")}
     onclick={zenModeToggler}
   >
     {#snippet icon()}

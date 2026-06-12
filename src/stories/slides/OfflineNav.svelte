@@ -1,8 +1,11 @@
 <script lang="ts">
+  import AnimatedRoad from "@/components/AnimatedRoad.svelte";
   import { i18n } from "@/services/i18n";
 </script>
 
 <section class="offline-nav">
+  <AnimatedRoad />
+
   <div class="heading">
     <h1 class="heading__title">{$i18n.t("text.offlineNav.title")}</h1>
     <p class="heading__slogan">{$i18n.t("text.offlineNav.slogan")}</p>
@@ -18,8 +21,39 @@
     @include flex-column;
 
     & {
+      position: relative;
+
       height: 100%;
       padding: var(--size-xl) var(--size-xl);
+
+      @include z-index-xs;
+
+      &::before {
+        content: "";
+
+        display: inline-block;
+
+        position: absolute;
+        left: rem(-10);
+        right: rem(-10);
+        top: rem(-10);
+        bottom: rem(-10);
+        // left: 0;
+        // right: 0;
+        // top: 0;
+        // bottom: 0;
+
+        background-image: linear-gradient(rgba(43, 43, 43, 0.7), rgba(43, 43, 43, 0.7)),
+          url("$assets/images/bg-screenshotv2.webp");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top;
+
+        border-radius: var(--b-radius-s);
+        opacity: 0.9;
+
+        @include z-index-negative;
+      }
     }
   }
 
