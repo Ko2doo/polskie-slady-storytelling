@@ -33,8 +33,7 @@
   const POPUP_ID = "settings";
   const SUBMENU_GROUP = "settings.locales";
 
-  const sceneControllerContext = slidesController();
-  setContext("sceneController", sceneControllerContext);
+  setContext("sceneController", sceneController);
 
   let triggerEl: HTMLButtonElement | undefined = $state();
 
