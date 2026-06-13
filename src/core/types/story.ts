@@ -1,6 +1,7 @@
 export type SlideAPI = {
   el: HTMLElement;
   timeline: GSAPTimeline;
+  onEnter?: () => void;
 };
 
 export type StoryScene = {

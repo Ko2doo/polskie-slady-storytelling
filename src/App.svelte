@@ -1,10 +1,11 @@
 <script lang="ts">
+  import { setContext, onMount } from "svelte";
   import { i18n } from "@/services/i18n";
   import { localeCode } from "./locales";
   import { appState } from "@/core/state/app-state.svelte";
 
   import { createUIContext, POPUP_GROUP } from "@/services/UIController.svelte";
-  import { createController } from "@/core/controller/slide-controller.svelte";
+  import { slidesController } from "@/core/controller/slide-controller.svelte";
 
   // Icons
   import MaximizeIcon from "$assets/icons/ui/Maximize.svg?raw";
@@ -28,9 +29,12 @@
   import OfflineNav from "./story/slides/map/OfflineNav.svelte";
 
   const ui = createUIContext();
-  const sceneController = createController();
+  const sceneController = slidesController();
   const POPUP_ID = "settings";
   const SUBMENU_GROUP = "settings.locales";
+
+  const sceneControllerContext = slidesController();
+  setContext("sceneController", sceneControllerContext);
 
   let triggerEl: HTMLButtonElement | undefined = $state();
 
@@ -74,8 +78,10 @@
     };
   });
 
-  $effect(() => {
-    appState.setCurrentSlide(sceneController.current);
+  onMount(() => {
+    const restoreIndex = appState.currentSlide;
+
+    if (restoreIndex > 0) sceneController.jumpTo(restoreIndex);
   });
 </script>
 

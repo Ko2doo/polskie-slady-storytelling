@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  // import { animate } from "@/core/animation/animate.svelte";
   import { buildTimeline } from "@/core/animation/build-timeline";
 
   import type { SlideController } from "@/core/controller/slide-controller.svelte";
@@ -24,6 +23,7 @@
 
   let el: HTMLElement;
   let timeline = $state<GSAPTimeline | undefined>();
+  let arrowsTimeline = $state<GSAPTimeline | undefined>();
 
   onMount(() => {
     timeline = buildTimeline(el);
@@ -41,13 +41,14 @@
 
     // Desktop
     mm.add("(min-width: 1400px)", () => {
-      const tl = gsap.timeline();
+      arrowsTimeline = gsap.timeline({ paused: true });
 
-      tl.from("#arrow-body-1", {
-        drawSVG: "0%",
-        duration: 1.5,
-        ease: "power1.inOut",
-      })
+      arrowsTimeline
+        .from("#arrow-body-1", {
+          drawSVG: "0%",
+          duration: 1.5,
+          ease: "power1.inOut",
+        })
         .from(
           "#arrow-tip-1",
           {
@@ -65,7 +66,11 @@
         })
         .from("#arrow-tip-2", { drawSVG: "0%", duration: 0.4, ease: "power1.out" }, "-=0.2");
 
-      return () => tl.kill();
+      if (controller?.current === index) {
+        arrowsTimeline.restart();
+      }
+
+      return () => (arrowsTimeline = undefined);
     });
 
     // Mobile devices
@@ -75,6 +80,12 @@
 
     // Global cleaner with unmount component
     return () => mm.revert();
+  });
+
+  // Reaction for active slide
+  $effect(() => {
+    if (controller?.current === index) arrowsTimeline?.restart();
+    else arrowsTimeline?.pause(0);
   });
 </script>
 

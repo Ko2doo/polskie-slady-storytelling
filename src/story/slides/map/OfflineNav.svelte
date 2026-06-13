@@ -23,19 +23,24 @@
     timeline = buildTimeline(el);
 
     const isInitial = index === controller?.current;
-    const api = { el, timeline };
+    const api = {
+      el,
+      timeline,
+    };
 
     isInitial ? showSlide(api) : hideSlide(api);
 
     controller?.register(index, api);
 
-    if (isInitial) timeline.restart();
+    if (isInitial) {
+      timeline.restart();
+    }
   });
 </script>
 
 <section class="offline-nav" bind:this={el}>
   <div class="wrapper">
-    <AnimatedRoad />
+    <AnimatedRoad {index} />
 
     <div class="heading">
       <h1 class="heading__title" use:animate={{ preset: "fadeUpSmall", at: "-=.4" }}>
@@ -61,6 +66,7 @@
     @include scene-rule;
 
     & {
+      isolation: isolate;
       margin: var(--size-l) 0;
       overflow: hidden;
       // position: relative;
@@ -89,8 +95,6 @@
 
         border-radius: var(--b-radius-s);
         opacity: 0.9;
-
-        @include z-index-negative;
       }
     }
   }

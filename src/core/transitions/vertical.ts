@@ -9,6 +9,7 @@ export function verticalTransition({ from, to, dir }: TransitionContext): Promis
     const tl = gsap.timeline({
       onComplete: () => {
         hideSlide(from);
+        to.onEnter?.();
         resolve();
       },
     });

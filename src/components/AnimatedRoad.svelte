@@ -1,43 +1,82 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { getContext, onMount } from "svelte";
   import { gsap } from "@/services/gsap";
+  import type { SlideController } from "@/core/controller/slide-controller.svelte";
+
+  type Props = { index: number };
+  let { index }: Props = $props();
+
+  const controller = getContext<SlideController>("sceneController");
 
   // array svg pathes
   let paths = $state<(SVGPathElement | null)[]>([]);
-  let tl: gsap.core.Timeline | null = null;
+  let roadsTimeline = $state<GSAPTimeline | undefined>();
 
   onMount(() => {
     const validPaths = paths.filter((path): path is SVGPathElement => path !== null);
 
-    if (validPaths.length > 0) {
-      tl = gsap.timeline();
+    if (validPaths.length === 0) return;
 
-      validPaths.forEach((path) => {
-        const length = path.getTotalLength();
+    roadsTimeline = gsap.timeline({ paused: true });
+    console.log("[onMount] timeline created, current:", controller?.current, "index:", index);
 
-        // hidden current line
-        gsap.set(path, {
+    validPaths.forEach((path) => {
+      const length = path.getTotalLength();
+
+      roadsTimeline!.fromTo(
+        path,
+        {
           strokeDasharray: length,
           strokeDashoffset: length,
           autoAlpha: 1,
-        });
+        },
+        {
+          strokeDashoffset: 0,
+          duration: 2.3,
+          ease: "power2.out",
+        },
+        "<+0.15",
+      );
 
-        // Animation roads
-        tl!.to(
-          path,
-          {
-            strokeDashoffset: 0,
-            duration: 2.3,
-            ease: "power2.out",
-          },
-          "<+0.15",
-        );
-      });
+      // hidden current line
+      // gsap.set(path, {
+      //   strokeDasharray: length,
+      //   strokeDashoffset: length,
+      //   autoAlpha: 1,
+      // });
+
+      // // Animation roads
+      // roadsTimeline!.to(
+      //   path,
+      //   {
+      //     strokeDashoffset: 0,
+      //     duration: 2.3,
+      //     ease: "power2.out",
+      //   },
+      //   "<+0.15",
+      // );
+    });
+
+    if (controller?.current === index) {
+      roadsTimeline.restart();
     }
 
     return () => {
-      if (tl) tl.kill();
+      roadsTimeline?.kill();
+      roadsTimeline = undefined;
     };
+  });
+
+  $effect(() => {
+    console.log("[effect] current:", controller?.current, "index:", index, "timeline:", !!roadsTimeline);
+
+    if (controller?.current === index) {
+      console.log("[effect] → restart");
+      roadsTimeline?.pause(0).restart();
+    } else {
+      console.log("[effect] → pause");
+      roadsTimeline?.pause(0);
+    }
   });
 </script>
 
@@ -225,8 +264,6 @@
     width: calc(100% + #{rem(20)});
     height: calc(100% + #{rem(20)});
     pointer-events: none;
-
-    z-index: -1;
   }
 
   .route-path {

@@ -1,11 +1,11 @@
-import { gsap } from '@/services/gsap';
 import { storyboard } from '@/story/storyboard';
 import { transitions, type TransitionName } from '@/core/transitions/registry';
 
 import type { SlideAPI, TransitionContext } from '@/core/types/story';
+import { appState } from '@/core/state/app-state.svelte';
 
-export function createController() {
-  let current = $state(0);
+export function slidesController() {
+  let current = $state(appState.currentSlide);
   let transitioning = $state(false);
 
   const slides: SlideAPI[] = [];
@@ -34,11 +34,19 @@ export function createController() {
 
     current = index;
     transitioning = false;
+
+    appState.setCurrentSlide(current);
+  }
+
+  function jumpTo(index: number): void {
+    if (!slides[index]) return;
+    current = index;
   }
 
   return {
     register,
     go,
+    jumpTo,
 
     next() {
       void go(current + 1);
@@ -46,6 +54,10 @@ export function createController() {
 
     prev() {
       void go(current - 1);
+    },
+
+    isActive(index: number) {
+      return current === index;
     },
 
     get current() {
@@ -58,4 +70,4 @@ export function createController() {
   };
 }
 
-export type SlideController = ReturnType<typeof createController>;
+export type SlideController = ReturnType<typeof slidesController>;

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { fly } from "svelte/transition";
+
   import Button from "$libs/components/Button.svelte";
   import PrevIcon from "$assets/icons/ui/ArrowUp.svg?raw";
   import NextIcon from "$assets/icons/ui/ArrowDown.svg?raw";
@@ -7,10 +9,12 @@
 </script>
 
 <nav class="nav-controller">
-  {#if controller.current !== 0}
-    <Button buttonName="scene-controller" onclick={() => controller.prev()}>
-      {#snippet icon()}{@html PrevIcon}{/snippet}
-    </Button>
+  {#if controller.current > 0}
+    <div in:fly={{ duration: 120, y: -40 }} out:fly={{ duration: 120, y: -20 }}>
+      <Button buttonName="scene-controller" onclick={() => controller.prev()}>
+        {#snippet icon()}{@html PrevIcon}{/snippet}
+      </Button>
+    </div>
   {/if}
 
   <Button buttonName="scene-controller" onclick={() => controller.next()}>
