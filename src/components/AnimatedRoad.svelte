@@ -18,7 +18,6 @@
     if (validPaths.length === 0) return;
 
     roadsTimeline = gsap.timeline({ paused: true });
-    console.log("[onMount] timeline created, current:", controller?.current, "index:", index);
 
     validPaths.forEach((path) => {
       const length = path.getTotalLength();
@@ -37,24 +36,6 @@
         },
         "<+0.15",
       );
-
-      // hidden current line
-      // gsap.set(path, {
-      //   strokeDasharray: length,
-      //   strokeDashoffset: length,
-      //   autoAlpha: 1,
-      // });
-
-      // // Animation roads
-      // roadsTimeline!.to(
-      //   path,
-      //   {
-      //     strokeDashoffset: 0,
-      //     duration: 2.3,
-      //     ease: "power2.out",
-      //   },
-      //   "<+0.15",
-      // );
     });
 
     if (controller?.current === index) {
@@ -68,8 +49,6 @@
   });
 
   $effect(() => {
-    console.log("[effect] current:", controller?.current, "index:", index, "timeline:", !!roadsTimeline);
-
     if (controller?.current === index) {
       console.log("[effect] → restart");
       roadsTimeline?.pause(0).restart();

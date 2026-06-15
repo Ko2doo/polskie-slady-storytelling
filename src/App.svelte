@@ -98,15 +98,15 @@
     </div>
   </main>
 {:else}
-  <Navigation controller={sceneController} />
+  <Navigation />
 
   <main class="container">
     <div class="viewport">
-      <Intro index={0} controller={sceneController} />
-      <History index={1} controller={sceneController} />
-      <AppInfo index={2} controller={sceneController} />
-      <Advantage index={3} controller={sceneController} />
-      <OfflineNav index={4} controller={sceneController} />
+      <Intro index={0} />
+      <History index={1} />
+      <AppInfo index={2} />
+      <Advantage index={3} />
+      <OfflineNav index={4} />
     </div>
   </main>
 {/if}

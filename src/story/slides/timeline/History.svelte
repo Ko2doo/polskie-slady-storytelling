@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { getContext, onMount } from "svelte";
   import { buildTimeline } from "@/core/animation/build-timeline";
 
   import type { SlideController } from "@/core/controller/slide-controller.svelte";
@@ -16,11 +16,11 @@
 
   type Props = {
     index: number;
-    controller?: SlideController;
   };
 
-  let { index, controller }: Props = $props();
+  let { index }: Props = $props();
 
+  const controller = getContext<SlideController>("sceneController");
   let el: HTMLElement;
   let timeline = $state<GSAPTimeline | undefined>();
   let arrowsTimeline = $state<GSAPTimeline | undefined>();
