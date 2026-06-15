@@ -2,7 +2,8 @@ import type { PresetName } from './presets';
 
 export type AnimationConfig = {
   preset: PresetName;
-  vars?: Record<string, unknown>;
+  vars?: GSAPTweenVars;
+  // vars?: Record<string, unknown>;
   at?: string | number;
 };
 

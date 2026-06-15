@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import type { SvelteHTMLElements } from "svelte/elements";
-  import { useUI } from "@/services/UIController.svelte";
+  import { useUI } from "@/services/uiController.svelte";
 
   import ExpandableSection from "./ExpandableSection.svelte";
   import Button from "./Button.svelte";

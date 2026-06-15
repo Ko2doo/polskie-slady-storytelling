@@ -1,10 +1,10 @@
 <script lang="ts">
   import { getContext, onMount } from "svelte";
   import { animate } from "@/core/animation/animate.svelte";
-  import { buildTimeline } from "@/core/animation/BuildTimeline";
+  import { buildTimeline } from "@/core/animation/buildTimeline";
 
   import { showSlide, hideSlide } from "@/core/transitions/visibility";
-  import type { SlideController } from "@/core/controller/SlideController.svelte";
+  import type { SlideController } from "@/core/controller/slideController.svelte";
 
   import AnimatedRoad from "@/core/animation/components/AnimatedRoad.svelte";
   import { i18n } from "@/services/i18n";

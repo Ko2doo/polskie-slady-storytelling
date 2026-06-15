@@ -2,7 +2,7 @@ import { storyboard } from '@/story/storyboard';
 import { transitions, type TransitionName } from '@/core/transitions/registry';
 
 import type { SlideAPI, TransitionContext } from '@/core/types/story';
-import { appState } from '@/core/state/AppState.svelte';
+import { appState } from '@/core/state/appState.svelte';
 
 export function slidesController() {
   let current = $state(appState.currentSlide);

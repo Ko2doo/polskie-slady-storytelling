@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { useUI } from "@/services/UIController.svelte";
-  import { POPUP_GROUP } from "@/services/UIController.svelte";
+  import { useUI } from "@/services/uiController.svelte";
+  import { POPUP_GROUP } from "@/services/uiController.svelte";
 
   const ui = useUI();
 

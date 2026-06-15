@@ -1,12 +1,13 @@
+import type { TransitionName } from '@/core/transitions/registry';
+
 export type SlideAPI = {
   el: HTMLElement;
   timeline: GSAPTimeline;
-  onEnter?: () => void;
 };
 
 export type StoryScene = {
   id: string;
-  transition: string;
+  transition: TransitionName;
 };
 
 export type TransitionContext = {

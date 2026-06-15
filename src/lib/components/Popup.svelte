@@ -4,7 +4,7 @@
 
   import { untrack } from "svelte";
   import { gsap } from "@/core/services/gsap";
-  import { useUI } from "@/services/UIController.svelte";
+  import { useUI } from "@/services/uiController.svelte";
 
   // Positioning
   type Placement = "top" | "bottom";
