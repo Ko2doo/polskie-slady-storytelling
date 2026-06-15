@@ -126,40 +126,19 @@
 
     & {
       width: 100%;
+
+      justify-content: center;
+
+      gap: var(--size-s);
+    }
+
+    @media (max-width: rem(1060)) {
+      margin-top: var(--size-s);
     }
   }
 
-  :global(.card) {
-    @include col;
-    @include col-size(12);
-
-    & {
-      align-items: center;
-      text-align: center;
-
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: var(--grid-system-offset-oneside);
-    }
-
-    @media (min-width: rem(960)) {
-      @include col-size(6);
-
-      & {
-        margin-right: 0;
-      }
-
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    @media (min-width: rem(1200)) {
-      @include col-size(3);
-
-      & {
-        margin-bottom: 0;
-      }
-    }
+  :global(.app-info .card) {
+    @include card-size-rule;
   }
 
   .card-description {
