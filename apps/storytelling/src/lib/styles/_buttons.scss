@@ -7,8 +7,16 @@
   --btn-label-color: var(--text-color);
   --btn-bg-hover-color: var(--secondary-bg);
 
-  &:hover {
-    background: var(--btn-bg-hover-color);
+  @include media-hover(hover) {
+    &:hover {
+      background: var(--btn-bg-hover-color);
+    }
+  }
+
+  @include media-hover(none) {
+    &:hover {
+      background: var(--btn-bg-hover-color);
+    }
   }
 }
 

@@ -5,6 +5,7 @@
 
   import { showSlide, hideSlide } from "@/core/transitions/visibility";
   import type { SlideController } from "@/core/controller/slideController.svelte";
+  import { presets } from "@/core/animation/presets";
 
   import { i18n } from "@/services/i18n";
 
@@ -28,6 +29,21 @@
   onMount(() => {
     timeline = buildTimeline(el);
 
+    const cardsPreset = presets.cards;
+
+    timeline.fromTo(
+      el.querySelectorAll(".card"),
+
+      cardsPreset.from,
+
+      {
+        ...cardsPreset.to,
+        stagger: cardsPreset.stagger,
+      },
+
+      "-=.2",
+    );
+
     const isInitial = index === controller?.current;
     const api = { el, timeline };
 
@@ -50,7 +66,7 @@
       </p>
     </div>
 
-    <div class="content">
+    <div class="content" data-animate-cards>
       <Card class="card">
         <header class="card-header">
           {@html USAFlag}

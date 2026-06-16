@@ -15,6 +15,7 @@
   import FreeIcon from "$assets/icons/creative-commons-nc.svg?raw";
   import NoDataIcon from "$assets/icons/mobiledata-off.svg?raw";
   import LicensyIcon from "$assets/icons/license.svg?raw";
+  import { presets } from "@/core/animation/presets";
 
   type Props = {
     index: number;
@@ -28,6 +29,21 @@
 
   onMount(() => {
     timeline = buildTimeline(el);
+
+    const cardsPreset = presets.cards;
+
+    timeline.fromTo(
+      el.querySelectorAll(".card"),
+
+      cardsPreset.from,
+
+      {
+        ...cardsPreset.to,
+        stagger: cardsPreset.stagger,
+      },
+
+      "-=.2",
+    );
 
     const isInitial = index === controller?.current;
     const api = { el, timeline };
@@ -47,7 +63,7 @@
       <p class="heading__slogan" use:animate={{ preset: "fadeUpSmall" }}>{$i18n.t("text.app.slogan")}</p>
     </div>
 
-    <div class="content">
+    <div class="content" data-animate-cards>
       <Card class="card">
         <header class="card-header">
           {@html AndroidIcon}

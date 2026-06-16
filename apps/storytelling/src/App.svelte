@@ -2,6 +2,7 @@
   import { setContext, onMount } from "svelte";
   import { i18n } from "@/services/i18n";
   import { localeCode } from "./locales";
+  import { removeLocalStorage } from "./utils/localeStorageUtils";
   import { appState } from "@/core/state/appState.svelte";
 
   import { createUIContext, POPUP_GROUP } from "@/services/uiController.svelte";
@@ -148,7 +149,14 @@
   </Menu>
 
   {#if !appState.locked}
-    <Button buttonName="menu-button" label={$i18n.t("ui.popup.lock")} onclick={() => appState.lock()}>
+    <Button
+      buttonName="menu-button"
+      label={$i18n.t("ui.popup.lock")}
+      onclick={() => {
+        appState.lock();
+        removeLocalStorage("CapacitorStorage.app.onboarding.completed");
+      }}
+    >
       {#snippet icon()}
         {@html LockIcon}
       {/snippet}

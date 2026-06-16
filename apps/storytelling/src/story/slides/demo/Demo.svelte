@@ -5,6 +5,9 @@
 
   import type { SlideController } from "@/core/controller/slideController.svelte";
   import { showSlide, hideSlide } from "@/core/transitions/visibility";
+  import { i18n } from "@/services/i18n";
+
+  import QrCode from "$assets/images/polskie-slady.png";
 
   type Props = {
     index: number;
@@ -48,6 +51,14 @@
 
 <section class="demo" bind:this={el}>
   <div class="wrapper">
+    <article class="qr">
+      <div class="heading">
+        <h3 class="qr__title">{$i18n.t("text.qr.title")}</h3>
+        <p class="qr__text">{$i18n.t("text.qr.text")}</p>
+      </div>
+      <img src={QrCode} alt="Polskie Ślady Taszkent qr" class="qr__code" />
+    </article>
+
     <article class="smartphone">
       <span class="kamera"></span>
       {#if mounted}
@@ -64,17 +75,58 @@
 
   .wrapper {
     @include size(12);
-    @include flex-column;
+    @include flex-row;
 
     & {
       align-items: center;
       justify-content: center;
+
+      gap: var(--size-xxl);
     }
   }
 
   .demo {
     @include scene-rule;
     // @include scene-advanced;
+  }
+
+  .qr {
+    @include flex-column;
+
+    & {
+      width: rem(360);
+      height: auto;
+
+      // align-items: center;
+
+      gap: var(--size-m);
+    }
+
+    .heading {
+      @include flex-column;
+
+      & {
+        gap: var(--size-s);
+        padding-left: rem(10);
+      }
+    }
+
+    &__title {
+      @include heading(left, --f-size-l, --text-color);
+    }
+
+    &__text {
+      @include slogan(left, --f-size-s, --text-color);
+    }
+
+    &__code {
+      width: fit-content;
+      height: fit-content;
+
+      flex: 0 0 auto;
+
+      object-fit: contain;
+    }
   }
 
   .smartphone {

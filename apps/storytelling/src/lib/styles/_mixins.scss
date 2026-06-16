@@ -9,6 +9,22 @@
   padding: var(--size-s);
 }
 
+@mixin media-hover($value) {
+  @media (hover: $value) {
+    & {
+      @content;
+    }
+  }
+}
+
+@mixin media-focus($value) {
+  @media (focus: $value) {
+    & {
+      @content;
+    }
+  }
+}
+
 // *
 
 // :------> Popup
@@ -105,8 +121,16 @@
   border-radius: var(--b-radius-s);
   color: var(--submenu-color);
 
-  &:hover {
-    background-color: var(--submenu-bg);
+  @include media-hover(hover) {
+    &:hover {
+      background-color: var(--submenu-bg);
+    }
+  }
+
+  @include media-hover(none) {
+    &:hover {
+      background-color: var(--submenu-bg);
+    }
   }
 }
 

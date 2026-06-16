@@ -24,3 +24,11 @@ export function getLocalStorage<T>(key: string): T | null {
     return null;
   }
 }
+
+export function removeLocalStorage(key: string): void {
+  try {
+    window.localStorage.removeItem(key);
+  } catch (error) {
+    console.warn('localStoreage remove failed', error);
+  }
+}

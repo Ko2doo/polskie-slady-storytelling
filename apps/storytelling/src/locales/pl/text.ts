@@ -7,17 +7,6 @@ export default {
     tml: 'Chronologia wydarzeń',
     map: 'Mapa analogowa',
   },
-  // history: [
-  //   {
-  //     title: 'Kalendar Świąt',
-  //   },
-  //   {
-  //     title: 'Chronologia wydarzeń',
-  //   },
-  //   {
-  //     title: 'Mapa analogowa',
-  //   },
-  // ],
   app: {
     platform: 'Jeden kod, dwie platformy',
     free: 'To jest darmowe!',
@@ -36,5 +25,9 @@ export default {
   offlineNav: {
     title: 'Nawigacja offline',
     slogan: 'Karta SIM nie jest już potrzebna podczas zwiedzania',
+  },
+  qr: {
+    title: 'Dostępne w Google Play',
+    text: 'Zeskanuj kod, aby wypróbować',
   },
 };
