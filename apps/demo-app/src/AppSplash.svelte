@@ -1,6 +1,7 @@
 <script>
   import { fly } from "svelte/transition";
   import { setTabbar } from "./store/ui/bottomTabbarNav";
+  import AppIcon from "@/assets/icons/app-icon.png";
 
   let { appName = "", version = "" } = $props();
 
@@ -11,7 +12,7 @@
 
 <article class="app-splash-screen" out:fly={{ duration: 500, y: 20, delay: 200 }}>
   <div class="app-logo-wrapper">
-    <img class="app-logo" src="app-icon.png" alt="App logo" />
+    <img class="app-logo" src={AppIcon} alt="App logo" />
     <h1 class="app-name">
       {appName}
     </h1>

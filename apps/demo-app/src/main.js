@@ -11,6 +11,10 @@ import './App.css';
 import App from './App.svelte';
 
 async function bootstrap() {
+  if (location.pathname !== '/') {
+    history.replaceState(history.state, document.title, '/' + location.search + location.hash);
+  }
+
   // Theme init
   await getThemeManager().init();
 

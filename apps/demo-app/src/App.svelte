@@ -67,23 +67,23 @@
     APP_READY = true;
   });
 
-  console.log("href:", location.href);
-  console.log("pathname:", location.pathname);
-  console.log("hash:", location.hash);
+  // console.log("href:", location.href);
+  // console.log("pathname:", location.pathname);
+  // console.log("hash:", location.hash);
 
-  let instance = $state();
+  // let instance = $state();
 
-  $effect(() => {
-    if (!instance) return;
+  // $effect(() => {
+  //   if (!instance) return;
 
-    console.debug("dumping routes", {
-      id: instance.id,
-      config: instance.config,
-      routes: instance.routes,
-      current: instance.current,
-      navigating: instance.navigating,
-    });
-  });
+  //   console.debug("dumping routes", {
+  //     id: instance.id,
+  //     config: instance.config,
+  //     routes: instance.routes,
+  //     current: instance.current,
+  //     navigating: instance.navigating,
+  //   });
+  // });
 </script>
 
 {#if !APP_READY}
@@ -134,10 +134,8 @@
         <!-- Centered content -->
         <main class="flex-1">
           <Router
-            bind:instance
-            on:init={(e) => (router = e.detail)}
+            // bind:instance
             {routes}
-            useHash={true}
             basePath="/"
             {i18n}
             {appName}

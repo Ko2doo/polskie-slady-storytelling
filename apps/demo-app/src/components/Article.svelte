@@ -37,7 +37,7 @@
 </script>
 
 <Popup opened={articlePopupState.isOpen}>
-  <Page>
+  <Page class="popup-page">
     <Navbar>
       {#snippet left()}
         <NavbarBackLink text="Back" onClick={articlePopupState.close} />
@@ -72,3 +72,12 @@
     {/if}
   </Page>
 </Popup>
+
+<style lang="css">
+  :global(.popup-page) {
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+</style>
