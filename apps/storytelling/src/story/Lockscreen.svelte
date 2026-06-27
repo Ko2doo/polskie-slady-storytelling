@@ -81,6 +81,8 @@
     @include flex-column;
 
     & {
+      height: 100%;
+
       padding-top: var(--size-xxl);
       justify-content: space-between;
     }

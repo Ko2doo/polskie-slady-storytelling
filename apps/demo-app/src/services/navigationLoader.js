@@ -122,7 +122,8 @@ export async function initNavigation() {
     const startTime = performance.now();
 
     try {
-      const response = await fetch('/map/navigation-graph-optimized.json');
+      // From gh pages: 'polskie-slady-storytelling-preview/demo/map/navigation-graph-optimized.json'
+      const response = await fetch('demo/map/navigation-graph-optimized.json');
 
       if (!response.ok) {
         throw new Error(`Failed to load navigation graph: ${response.status}`);

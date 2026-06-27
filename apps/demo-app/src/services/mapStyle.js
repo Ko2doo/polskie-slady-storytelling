@@ -86,6 +86,7 @@ export function buildBaseMapStyle({
   const pmtilesUrl = `pmtiles://${pmtilesKey}`;
 
   // Local glyphs (.pbf)
+  // From gh pages `${origin}polskie-slady-storytelling-preview/demo/fonts/map/{fontstack}/{range}.pbf`
   const demo = `${origin}demo/fonts/map/{fontstack}/{range}.pbf`;
   const dev = '/fonts/map/{fontstack}/{range}.pbf';
   const glyphsUrl = import.meta.env.DEV ? dev : demo;
@@ -93,6 +94,7 @@ export function buildBaseMapStyle({
   // Local sprites:
   // public/map/sprites/light/light.{png,json}
   // public/map/sprites/dark/dark.{png,json}
+  // From gh pages: `${origin}polskie-slady-storytelling-preview/demo/map/sprites`
   const spriteBase = import.meta.env.DEV ? `${origin}/map/sprites` : `${origin}demo/map/sprites`;
   const spriteUrl = `${spriteBase}/${theme}/${theme}`;
 

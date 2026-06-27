@@ -12,6 +12,7 @@
 // PMTILES CONFIGURATION
 // ========================================
 
+// From gh pages: `${import.meta.env.BASE_URL}/polskie-slady-storytelling-preview/demo/map/tashkent_20251124.pmtiles`
 export const PMTILES_PATH = import.meta.env.DEV
   ? '/map/tashkent_20251124.pmtiles'
   : `${import.meta.env.BASE_URL}/demo/map/tashkent_20251124.pmtiles`;

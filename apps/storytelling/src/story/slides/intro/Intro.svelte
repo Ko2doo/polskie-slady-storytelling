@@ -86,11 +86,16 @@
   }
 
   .app-icon {
-    width: clamp(rem(320), 6vw, rem(120));
-    height: clamp(rem(320), 6vw, rem(120));
+    width: clamp(rem(120), 6vw, rem(60));
+    height: clamp(rem(120), 6vw, rem(60));
 
     object-fit: contain;
     object-position: center;
+
+    @media (min-width: rem(1200)) {
+      width: clamp(rem(320), 6vw, rem(120));
+      height: clamp(rem(320), 6vw, rem(120));
+    }
   }
 
   .app-name {
