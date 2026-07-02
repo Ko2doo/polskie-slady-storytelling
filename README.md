@@ -4,16 +4,26 @@ A companion presentation app built to showcase [Polskie Ślady Taszkent](https:/
 on a large-format 4K interactive display during a live public presentation at the
 **Polish Cultural Center "Świetlica Polska"** in Tashkent (June 2026).
 
-The event was covered by [Polonijna Agencja Informacyjna](https://pai.media.pl/pai_wiadomosci.php?id=44227) [facebook](https://www.facebook.com/100072381157661/posts/1055541836868512/),
+🔗 **[Live Demo](https://ko2doo.github.io/polskie-slady-storytelling-preview/)**
+
+The event was covered by [Polonijna Agencja Informacyjna](https://pai.media.pl/pai_wiadomosci.php?id=44227) and [Polonijna Agencja Informacyjna facebook post](https://www.facebook.com/100072381157661/posts/1055541836868512/),
 a Polish diaspora press agency.
 
 ## What it does
 
 Instead of just demoing the main app on a phone, this project turns the presentation itself into an
-interactive exhibit: a scroll/step-driven storytelling layer built with GSAP walks the audience through
-the app's story — from the original paper walking-tour guide to the idea of a GPS-based digital app — and
-at the right moment hands off to a live, fully working instance of the app itself, embedded and interactive
-on the big screen.
+interactive exhibit. Navigation is deliberately simple — two buttons, back/forward — stepping through a
+sequence of vertical slides built with GSAP. Each slide is paced to match a specific beat of the live talk;
+the presentation is intentionally not self-explanatory on its own, it only makes sense alongside the
+presenter's narration.
+
+There's also a lock screen: while the audience takes their seats (roughly a 5-minute window), the display
+shows an interactive clock with the date instead of any presentation content, with an "unlock" button. This
+was a deliberate choice to keep the exhibit hidden from curious eyes until the presenter unlocks it by hand
+at the right moment.
+
+At the right point in the slide sequence, the presentation hands off to a live, fully working instance of
+the main app itself — embedded and interactive right there on the big screen.
 
 ## How it's built
 
@@ -33,4 +43,9 @@ Svelte 5 · Vite · GSAP · TypeScript · i18next · npm workspaces
 
 ## Photos
 
-_Photos from the live presentation to be added._
+<p align="center">
+  <img src=".github/images/00-preview.jpg" width="230" alt="Live presentation, view 1" />
+  <img src=".github/images/01-preview.jpg" width="230" alt="Live presentation, view 2" />
+  <img src=".github/images/02-preview.jpg" width="230" alt="Live presentation, view 3" />
+</p>
+<p align="center"><em>Live presentation at the Polish Cultural Center "Świetlica Polska", June 2026</em></p>
