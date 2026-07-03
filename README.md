@@ -6,8 +6,8 @@ on a large-format 4K interactive display during a live public presentation at th
 
 🔗 **[Live Demo](https://ko2doo.github.io/polskie-slady-storytelling-preview/)**
 
-The event was covered by [Polonijna Agencja Informacyjna](https://pai.media.pl/pai_wiadomosci.php?id=44227) and [Polonijna Agencja Informacyjna facebook post](https://www.facebook.com/100072381157661/posts/1055541836868512/),
-a Polish diaspora press agency.
+The event was covered by **Polonijna Agencja Informacyjna** — a Polish diaspora press
+agency — in a [full article](https://pai.media.pl/pai_wiadomosci.php?id=44227) and a [Facebook post](https://www.facebook.com/100072381157661/posts/1055541836868512/)
 
 ## What it does
 
