@@ -2,8 +2,6 @@
   import { Popup, Navbar, Block, Button, Page } from "konsta/svelte";
   import { fly } from "svelte/transition";
 
-  // Use permission service
-  import { requestLocationPermission, openAppSettings } from "@/capacitor/services/locationPermission";
   import { errorToast } from "@/store/ui/errorToast";
 
   import { createToggle } from "@/lib/state/createToggler.svelte";
@@ -24,88 +22,12 @@
 
   let activeStep = $state(1);
 
-  // Permissions state
-  let isRequestingPermission = $state(false);
-
   const TOTAL_STEPS = 2;
 
   $effect(() => {
     if ($appState === true) welcomeDialogToggler.set(true);
     if ($appState === false) welcomeDialogToggler.set(false);
   });
-
-  async function handleRequestPermission() {
-    isRequestingPermission = true;
-
-    try {
-      const result = await requestLocationPermission({
-        onSuccess: async () => {
-          IS_DEBUG && onboardingLogger.log("Location permission granted");
-          // Complete onboarding immediately
-          await completeOnboarding();
-        },
-        onDenied: () => {
-          IS_DEBUG && onboardingLogger.log("Location permission denied");
-
-          // Show toast with "Open Settings" action button
-          errorToast.error($i18n.t("errors:OS_PLUG_GLOC_0003"), {
-            scope: "WelcomeDialog",
-            code: "OS_PLUG_GLOC_0003",
-            action: {
-              type: "openSettings",
-              label: $i18n.t("ui:buttons:openSettings"),
-              handler: async () => {
-                IS_DEBUG && onboardingLogger.log("Opening app settings...");
-                await openAppSettings();
-                // After opening settings, complete onboarding
-                // User will grant permission manually in settings
-                await completeOnboarding();
-              },
-            },
-          });
-        },
-        onError: (err) => {
-          IS_DEBUG && onboardingLogger.error("Location permission error:", err);
-
-          // Ignore web platform error - not relevant for onboarding in dev mode
-          if (err.code === "WEB_PLATFORM_NOT_SUPPORTED") {
-            IS_DEBUG && onboardingLogger.log("Web platform detected, skipping permission request");
-            // Don't show error, just complete onboarding
-            completeOnboarding();
-            return;
-          }
-
-          // Show error via toast with action button for permission errors
-          const isPermissionError = err.code === "OS_PLUG_GLOC_0003";
-
-          errorToast.error($i18n.t(`errors:${err.code}`), {
-            scope: "WelcomeDialog",
-            code: err.code,
-            action: isPermissionError
-              ? {
-                  type: "openSettings",
-                  label: $i18n.t("ui:buttons:openSettings"),
-                  handler: async () => {
-                    IS_DEBUG && onboardingLogger.log("Opening app settings from error...");
-                    await openAppSettings();
-                    await completeOnboarding();
-                  },
-                }
-              : undefined,
-          });
-        },
-      });
-    } catch (error) {
-      IS_DEBUG && onboardingLogger.error("Failed to request location permission:", error);
-
-      // Show generic error
-      errorToast.error("Failed to request location permission", {
-        scope: "WelcomeDialog",
-      });
-    } finally {
-      isRequestingPermission = false;
-    }
-  }
 
   async function completeOnboarding() {
     try {
@@ -207,16 +129,13 @@
             </div>
 
             <div class="flex gap-2 justify-between pt-2">
-              <Button inline rounded onClick={prevStep} disabled={isRequestingPermission}>
+              <Button inline rounded onClick={prevStep}>
                 {$i18n.t("ui:buttons:back")}
               </Button>
 
               <div class="flex gap-2">
-                <Button inline rounded onClick={completeOnboarding} disabled={isRequestingPermission}>
+                <Button inline rounded onClick={completeOnboarding}>
                   {$i18n.t("ui:buttons:skip")}
-                </Button>
-                <Button inline rounded raised onClick={handleRequestPermission} disabled={isRequestingPermission}>
-                  {isRequestingPermission ? $i18n.t("ui:buttons:waiting") : $i18n.t("ui:buttons:allow")}
                 </Button>
               </div>
             </div>

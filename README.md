@@ -29,7 +29,7 @@ the main app itself — embedded and interactive right there on the big screen.
 
 npm workspaces monorepo with two independent Svelte 5 apps:
 
-- **`apps/demo-app`** — a lightweight instance of Polskie Ślady Taszkent (map, locales, data), built
+- **`apps/demo-app`** — a full preview instance of Polskie Ślady Taszkent (map, locales, data, point-to-point navigation), built
   standalone and served inside the presentation
 - **`apps/storytelling`** — the GSAP-driven narrative layer (i18next for multilingual delivery) that
   embeds `demo-app` via iframe and paces the story to match the live talk

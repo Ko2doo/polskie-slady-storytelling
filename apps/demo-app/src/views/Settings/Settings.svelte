@@ -11,8 +11,6 @@
   import { withNavbar } from "@/store/ui/navbar";
   import { withTabbar } from "@/store/ui/bottomTabbarNav";
 
-  import { openAppSettings } from "@/capacitor/services/locationPermission";
-
   import DarkModeToggler from "@/components/DarkModeToggler.svelte";
   import LangSwitcher from "@/components/LangSwitcher.svelte";
   import { goto } from "@mateothegreat/svelte5-router";
@@ -125,7 +123,7 @@
       </p>
     </div>
 
-    <Button raised rounded small onClick={() => openAppSettings()}>
+    <Button raised rounded small disabled>
       {$i18n.t("ui:buttons:openSettings")}
     </Button>
   </Block>

@@ -14,7 +14,7 @@
   </Button>
 
   <!-- GPS Navigation -->
-  <Button inline roundedIos class="k-color-brand-blue text-[16px]" onClick={onGPSToggle}>
+  <Button inline roundedIos disabled class="k-color-brand-blue text-[16px]" onClick={onGPSToggle}>
     <GPSIcon className="size-6 mr-2" />
 
     <span>
